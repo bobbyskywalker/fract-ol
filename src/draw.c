@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 11:32:31 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/13 11:32:32 by agarbacz         ###   ########.fr       */
+/*   Created: 2025/01/13 10:32:57 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/01/13 10:33:29 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-int main(int argc, char **argv)
+void	draw_pixel(t_frac_data *data, int x, int y, int color)
 {
-    t_frac_data fractal_data;
+	char	*dst;
 
-	if (handle_args(argc, argv))
-		return (1);
-	init_app(&fractal_data);
-	init_fractal(&fractal_data);
-
-    draw_fractal(&fractal_data, argv[1]);
-    mlx_loop(fractal_data.mlx_data->mlx_ptr);
+	if (x > SCREEN_WIDTH || y > SCREEN_HEIGHT || x < 0 || y < 0)
+	   return ;
+	dst = data->mlx_data->img_addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
