@@ -12,7 +12,7 @@
 
 #include "../inc/fractol.h"
 
-int draw_fractal(t_frac_data *fractal, char *name)
+int draw_fractal(t_frac_data *fractal)
 {
     fractal->y = 0;
     while (fractal->y < SCREEN_HEIGHT)
@@ -20,9 +20,9 @@ int draw_fractal(t_frac_data *fractal, char *name)
         fractal->x = 0;
         while (fractal->x < SCREEN_WIDTH)
         {
-            if (!strncmp("mandelbrot", name, 10))
+            if (!strncmp("mandelbrot", fractal->name, 10))
                 calculate_mandelbrot(fractal);
-            else if (!strncmp("julia", name, 5))
+            else if (!strncmp("julia", fractal->name, 5))
                 calculate_julia(fractal);
             fractal->x++;
         }

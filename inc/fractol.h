@@ -16,6 +16,7 @@
 #include "../lib/libft/libft.h"
 #include "../lib/minilibx-linux/mlx.h"
 #include "../lib/minilibx-linux/mlx_int.h"
+#include <X11/keysym.h>
 
 // constants
 #define SCREEN_WIDTH 1280
@@ -55,7 +56,7 @@ typedef struct	s_fractal_data {
 int	handle_args(int argc, char **argv);
 
 // inits
-void    init_fractal(t_frac_data *fractal_data);
+void    init_fractal(t_frac_data *fractal_data, char *name);
 void    init_app(t_frac_data *fractal_data);
 
 // fractal calculations
@@ -66,6 +67,10 @@ void    calculate_julia(t_frac_data *fractal);
 void	draw_pixel(t_frac_data *fractal_data, int x, int y, int color);
 
 // highest level func
-int     draw_fractal(t_frac_data *fractal, char *name);
+int     draw_fractal(t_frac_data *fractal);
+
+// key hooks
+int     mouse_controls(int button, int x, int y, t_frac_data *fractal);
+int     key_controls(int keycode, t_frac_data *fractal);
 
 #endif

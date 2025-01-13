@@ -12,6 +12,9 @@
 
 #include "../inc/fractol.h"
 
+//TODO: mouse following the cursor
+// new fractal
+
 int main(int argc, char **argv)
 {
     t_frac_data fractal_data;
@@ -19,8 +22,9 @@ int main(int argc, char **argv)
 	if (handle_args(argc, argv))
 		return (1);
 	init_app(&fractal_data);
-	init_fractal(&fractal_data);
-
-    draw_fractal(&fractal_data, argv[1]);
+	init_fractal(&fractal_data, argv[1]);
+    draw_fractal(&fractal_data);
+    mlx_mouse_hook(fractal_data.mlx_data->window_ptr, mouse_controls, &fractal_data);
+    mlx_key_hook(fractal_data.mlx_data->window_ptr, key_controls, &fractal_data);
     mlx_loop(fractal_data.mlx_data->mlx_ptr);
 }

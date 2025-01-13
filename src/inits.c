@@ -12,8 +12,9 @@
 
 #include "../inc/fractol.h"
 
-void    init_fractal(t_frac_data *fractal_data)
+void    init_fractal(t_frac_data *fractal_data, char *name)
 {
+    fractal_data->name = name;
     fractal_data->mlx_data->img_ptr = mlx_new_image(fractal_data->mlx_data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
     fractal_data->mlx_data->img_addr = mlx_get_data_addr(fractal_data->mlx_data->img_ptr, &fractal_data->bits_per_pixel, &fractal_data->line_length, &fractal_data->endian);
     fractal_data->x = 0;

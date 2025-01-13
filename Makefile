@@ -5,7 +5,7 @@ LDFLAGS = -L$(MINILIBX) -lmlx_Linux -L /usr/lib -lX11 -lXext -lbsd -lm
 NAME = fractol
 
 SRCS = src/main.c src/error_handler.c src/inits.c src/draw.c \
-	   src/mandelbrot.c src/julia.c src/draw_fractal.c
+	   src/mandelbrot.c src/julia.c src/draw_fractal.c src/key_controls.c
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BONUS_SRCS:.c=.o)
