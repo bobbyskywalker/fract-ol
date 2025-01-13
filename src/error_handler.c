@@ -15,10 +15,10 @@
 int	handle_args(int argc, char **argv)
 {
 	if (argc != 2 || (ft_strncmp(argv[1], "julia", 5) && ft_strncmp(argv[1],
-				"mandelbrot", 10)))
+				"mandelbrot", 10) && ft_strncmp(argv[1], "multibrot", 9)))
 	{
 		ft_printf("valid exec: ./fractol [fractal_name]\n");
-		ft_printf("fractal names: julia, mandelbrot");
+		ft_printf("fractal names: julia, mandelbrot, multibrot");
 		return (1);
 	}
 	return (0);

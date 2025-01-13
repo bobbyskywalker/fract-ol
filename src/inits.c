@@ -36,7 +36,7 @@ void	init_app(t_frac_data *fractal_data)
 	fractal_data->mlx_data = malloc(sizeof(t_mlx_data));
 	if (!fractal_data->mlx_data)
 	{
-		perror("Failed to allocate memory for mlx_data");
+		perror("MLX initialization failure");
 		exit(EXIT_FAILURE);
 	}
 	fractal_data->mlx_data->mlx_ptr = mlx_init();

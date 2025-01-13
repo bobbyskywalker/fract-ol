@@ -14,6 +14,7 @@
 
 // TODO: mouse following the cursor
 // new fractal
+// multibrot power selection
 
 int	main(int argc, char **argv)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
+#include <string.h>
 
 int	draw_fractal(t_frac_data *fractal)
 {
@@ -24,6 +25,8 @@ int	draw_fractal(t_frac_data *fractal)
 				calculate_mandelbrot(fractal);
 			else if (!strncmp("julia", fractal->name, 5))
 				calculate_julia(fractal);
+			else if (!strncmp("multibrot", fractal->name, 9))
+			     calculate_multibrot(fractal, 12);
 			fractal->x++;
 		}
 		fractal->y++;

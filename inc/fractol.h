@@ -17,6 +17,7 @@
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
 # include <X11/keysym.h>
+# include <math.h>
 
 // constants
 # define SCREEN_WIDTH 1280
@@ -62,6 +63,7 @@ void			init_app(t_frac_data *fractal_data);
 // fractal calculations
 void			calculate_mandelbrot(t_frac_data *fractal);
 void			calculate_julia(t_frac_data *fractal);
+void            calculate_multibrot(t_frac_data *fractal, int power);
 
 // drawing utils
 void			draw_pixel(t_frac_data *fractal_data, int x, int y, int color);
