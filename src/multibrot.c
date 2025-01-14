@@ -1,40 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multibrot.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 11:41:11 by agarbacz          #+#    #+#             */
+/*   Updated: 2025/01/14 11:41:14 by agarbacz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fractol.h"
 
-void calculate_multibrot(t_frac_data *fractal, int power) {
-    int     i;
-    double  x_temp;
-    double  r_squared;
-    double  theta;
+int	multibrot_loop(t_frac_data *fractal, t_multibrot *multibrot)
+{
+	int	i;
 
-    fractal->name = "multibrot";
-    i = 0;
-    fractal->zx = 0.0;
-    fractal->zy = 0.0;
-    fractal->cx = (fractal->x - (double)SCREEN_WIDTH / 2) / fractal->zoom
-                  + fractal->offset_x;
-    fractal->cy = (fractal->y - (double)SCREEN_HEIGHT / 2) / fractal->zoom
-                  + fractal->offset_y;
+	i = 0;
+	while (++i < fractal->max_iterations)
+	{
+		multibrot->r_squared = fractal->zx * fractal->zx + fractal->zy
+			* fractal->zy;
+		multibrot->theta = atan2(fractal->zy, fractal->zx);
+		multibrot->r = pow(multibrot->r_squared,
+				(double)fractal->multibrot_power / 2.0);
+		multibrot->angle = multibrot->theta * fractal->multibrot_power;
+		multibrot->x_temp = multibrot->r * cos(multibrot->angle) + fractal->cx;
+		fractal->zy = multibrot->r * sin(multibrot->angle) + fractal->cy;
+		fractal->zx = multibrot->x_temp;
+		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)
+			break ;
+	}
+	return (i);
+}
 
-    while (++i < fractal->max_iterations) {
-        // Convert (zx, zy) to polar coordinates
-        r_squared = fractal->zx * fractal->zx + fractal->zy * fractal->zy;
-        theta = atan2(fractal->zy, fractal->zx);
+void	calculate_multibrot(t_frac_data *fractal)
+{
+	int			i;
+	t_multibrot	*multibrot;
 
-        // Raise Z_n to the power using polar coordinates
-        double r = pow(r_squared, (double)power / 2.0);
-        double angle = theta * power;
-
-        x_temp = r * cos(angle) + fractal->cx; // Real part
-        fractal->zy = r * sin(angle) + fractal->cy; // Imaginary part
-        fractal->zx = x_temp;
-
-        // Escape condition
-        if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)
-            break;
-    }
-
-    if (i == fractal->max_iterations)
-        draw_pixel(fractal, fractal->x, fractal->y, 0x000000);
-    else
-        draw_pixel(fractal, fractal->x, fractal->y, (fractal->color * i) / fractal->max_iterations);
+	fractal->name = "multibrot";
+	multibrot = malloc(sizeof(t_multibrot));
+	if (!multibrot)
+		return ;
+	i = 0;
+	fractal->zx = 0.0;
+	fractal->zy = 0.0;
+	fractal->cx = (fractal->x - (double)SCREEN_WIDTH / 2) / fractal->zoom
+		+ fractal->offset_x;
+	fractal->cy = (fractal->y - (double)SCREEN_HEIGHT / 2) / fractal->zoom
+		+ fractal->offset_y;
+	i = multibrot_loop(fractal, multibrot);
+	if (i == fractal->max_iterations)
+		draw_pixel(fractal, fractal->x, fractal->y, 0x000000);
+	else
+		draw_pixel(fractal, fractal->x, fractal->y, (fractal->color * i)
+			/ fractal->max_iterations);
 }

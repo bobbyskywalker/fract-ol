@@ -6,12 +6,11 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:33:13 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/13 18:02:27 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:29:49 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
-#include <string.h>
 
 int	draw_fractal(t_frac_data *fractal)
 {
@@ -26,12 +25,13 @@ int	draw_fractal(t_frac_data *fractal)
 			else if (!strncmp("julia", fractal->name, 5))
 				calculate_julia(fractal);
 			else if (!strncmp("multibrot", fractal->name, 9))
-			     calculate_multibrot(fractal, 12);
+				calculate_multibrot(fractal);
 			fractal->x++;
 		}
 		fractal->y++;
 	}
 	mlx_put_image_to_window(fractal->mlx_data->mlx_ptr,
 		fractal->mlx_data->window_ptr, fractal->mlx_data->img_ptr, 0, 0);
+	draw_hud_text(fractal);
 	return (0);
 }

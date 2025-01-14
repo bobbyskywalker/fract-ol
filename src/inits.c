@@ -6,17 +6,21 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:32:52 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/13 18:03:56 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:42:18 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-void	init_fractal(t_frac_data *fractal_data, char *name)
+void	init_fractal(t_frac_data *fractal_data, char **argv)
 {
-	fractal_data->name = name;
-	fractal_data->mlx_data->img_ptr = mlx_new_image
-		(fractal_data->mlx_data->mlx_ptr,
+	fractal_data->name = argv[1];
+	if (!ft_strncmp(fractal_data->name, "julia", 5))
+		fractal_data->julia_paramset = ft_atoi(argv[2]);
+	else if (!ft_strncmp(fractal_data->name, "multibrot", 9))
+		fractal_data->multibrot_power = ft_atoi(argv[2]);
+	fractal_data->mlx_data->img_ptr = mlx_new_image(
+			fractal_data->mlx_data->mlx_ptr,
 			SCREEN_WIDTH, SCREEN_HEIGHT);
 	fractal_data->mlx_data->img_addr = mlx_get_data_addr(
 			fractal_data->mlx_data->img_ptr,
