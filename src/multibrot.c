@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:41:11 by agarbacz          #+#    #+#             */
-/*   Updated: 2025/01/14 11:41:14 by agarbacz         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:00:44 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void	calculate_multibrot(t_frac_data *fractal)
 	else
 		draw_pixel(fractal, fractal->x, fractal->y, (fractal->color * i)
 			/ fractal->max_iterations);
+	free(multibrot);
 }

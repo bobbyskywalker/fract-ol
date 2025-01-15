@@ -14,14 +14,18 @@ BOBJS = $(BONUS_SRCS:.c=.o)
 LIBFT = lib/libft
 LIBFT_LIB = $(LIBFT)/libft.a
 MINILIBX = lib/minilibx-linux
+MINILIBX_LIB = $(MINILIBX)/libmlx_Linux.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_LIB)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_LIB) $(LDFLAGS)
+$(NAME): $(OBJS) $(LIBFT_LIB) $(MINILIBX_LIB)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_LIB) $(MINILIBX_LIB) $(LDFLAGS)
 
 $(LIBFT_LIB):
 	make -C $(LIBFT)
+
+$(MINILIBX_LIB):
+	make -C $(MINILIBX)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -29,11 +33,14 @@ $(LIBFT_LIB):
 clean:
 	rm -f $(OBJS)
 	make -C $(LIBFT) clean
+	make -C $(MINILIBX) clean
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(LIBFT_LIB)
+	rm -f $(MINILIBX_LIB)
 	make -C $(LIBFT) fclean
+	make -C $(MINILIBX) clean
 
 re: fclean all
 
