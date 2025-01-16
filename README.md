@@ -11,7 +11,7 @@ A fractal rendering application for generating stunning fractal images and anima
 
 Ensure you have these prerequisites:
 
-- A Linux or macOS operating system (check macOS branch).
+- Linux operating system.
 - `gcc` (GNU Compiler Collection).
 - **MiniLibX** library (install manually: https://harm-smits.github.io/42docs/libs/minilibx).
 - `make` utility.
