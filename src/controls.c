@@ -27,7 +27,7 @@ int	mouse_controls(int button, int x, int y, t_frac_data *fractal)
 		fractal->zoom /= 1.1;
 	if (fractal->zoom > 300000000.0 || fractal->zoom < 0.500000)
 	{
-		printf("extreme zoom level: zoom set back to default");
+		ft_printf("extreme zoom level: zoom set back to default");
 		fractal->zoom = 300;
 	}
 	fractal->offset_x = mouse_real - (x - (double)SCREEN_WIDTH / 2)
